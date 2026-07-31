@@ -5,11 +5,13 @@ import joblib
 
 app = Flask(__name__)
 
-# Load model and scalers
-model = joblib.load('model.pkl')
-sc = joblib.load('standscaler.pkl')
-ms = joblib.load('minmaxscaler.pkl')
+import os
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model = joblib.load(os.path.join(BASE_DIR, "model.pkl"))
+sc = joblib.load(os.path.join(BASE_DIR, "standscaler.pkl"))
+ms = joblib.load(os.path.join(BASE_DIR, "minmaxscaler.pkl"))
 @app.route('/')
 def index():
     return render_template("index.html")
